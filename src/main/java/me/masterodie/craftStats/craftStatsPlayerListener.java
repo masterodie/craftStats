@@ -43,6 +43,7 @@ public class craftStatsPlayerListener extends PlayerListener {
 		
 		sql = new craftStatsSqlHandler(plugin);
 		sql.mySqlInsertQuery(player.getName(), 1, "is_online", "player");
+		sql.mySqlInsertQuery(playerName, this.playerLoginTime.getTime(), "last_login", "player");
 					
 		plugin.log.info("Player: " + playerName + " connected from " + player.getAddress().getHostName() + " at " + this.playerLoginTime.getTime() );
 	}
@@ -51,13 +52,26 @@ public class craftStatsPlayerListener extends PlayerListener {
 		
 		playerLogoutTime = new Date();
 		long timeOnline = this.playerLogoutTime.getTime() - this.playerLoginTime.getTime();
-				
+		
+		String group[] = craftStatsPlayerListener.plugin.permissionHandler.getGroups(event.getPlayer().getWorld().getName(), event.getPlayer().getName());
+		String groups = "";
+		
+		for(int i = 0; i <= group.length; i++) {
+			if(i == 0) 
+				groups = group[i];
+			else
+			    groups = groups + ", " + group[i];
+			
+		}
+		
+		
 		Player player = event.getPlayer();
 		String playerName = player.getName();
 				
 		sql = new craftStatsSqlHandler(plugin);
 		sql.mySqlInsertQuery(playerName, 0, "is_online", "player");
 		sql.mySqlInsertQuery(playerName, timeOnline, "time_online", "player");
+		sql.mySqlInsertQuery(playerName, groups, "permissions_groups", "player");
 	
 		plugin.log.info("Player: " + playerName + " disconnected at: " + this.playerLogoutTime.getTime() + " Time Online: " + timeOnline + "ms");
 	}

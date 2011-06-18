@@ -220,14 +220,13 @@ public class craftStatsSqlHandler {
 		
 		return 0;
 	}
-	
-
 
 	public void mySqlInsertQuery(String name, long value, String row, String type) {
 		
 		String query = null;
 		
 		Date date = new Date();
+
 		
 		if((row == "is_online" || row == "health") && type == "player") {
 			query = "INSERT INTO " + craftStatsSqlHandler.plugin.mySqlTablePrefix + craftStatsSqlHandler.plugin.mySqlUserTable + " ( `name`, `member_since` ) VALUES ( '" + name + "', '" + date.getTime() + "' ) ON DUPLICATE KEY UPDATE " + row + " = " + value + ";";
@@ -258,8 +257,38 @@ public void mySqlInsertQuery(String name, double value, String row, String type)
 		
 		String query = null;
 		
-		if(type == "player") 
-			query = "INSERT INTO " + craftStatsSqlHandler.plugin.mySqlTablePrefix + craftStatsSqlHandler.plugin.mySqlUserTable + " ( `name` ) VALUES ( '" + name + "' ) ON DUPLICATE KEY UPDATE " + row + " = " + row + "+"  + value + ";";
+		if(type == "player" && row == "last_login") {
+			query = "INSERT INTO " + craftStatsSqlHandler.plugin.mySqlTablePrefix + craftStatsSqlHandler.plugin.mySqlUserTable + " ( `name` ) VALUES ( '" + name + "' ) ON DUPLICATE KEY UPDATE " + row + " = " + value + ";";
+		} else { 
+			if(type == "player") 
+				query = "INSERT INTO " + craftStatsSqlHandler.plugin.mySqlTablePrefix + craftStatsSqlHandler.plugin.mySqlUserTable + " ( `name` ) VALUES ( '" + name + "' ) ON DUPLICATE KEY UPDATE " + row + " = " + row + "+"  + value + ";";
+			if(type == "block")
+				query = "INSERT INTO " + craftStatsSqlHandler.plugin.mySqlTablePrefix + craftStatsSqlHandler.plugin.mySqlBlockTable + " (`uID`) VALUES ( '" + this.getMySqlUserId(name) + "' ) ON DUPLICATE KEY UPDATE " + row + "=" + row + "+" + value + ";";
+			if(type == "item")
+				query = "INSERT INTO " + craftStatsSqlHandler.plugin.mySqlTablePrefix + craftStatsSqlHandler.plugin.mySqlItemTable + " (`uID`) VALUES ( '" + this.getMySqlUserId(name) + "' ) ON DUPLICATE KEY UPDATE " + row + "=" + row + "+" + value + ";";
+		}	
+		try {
+			plugin.manageMySql.insertQuery(query);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+public void mySqlInsertQuery(String name, String value, String row, String type) {
+	
+	String query = null;
+	
+	plugin.log.info("Test " + row + "   " + value);
+	
+	if(type == "player") 
+		query = "INSERT INTO " + craftStatsSqlHandler.plugin.mySqlTablePrefix + craftStatsSqlHandler.plugin.mySqlUserTable + " ( `name` ) VALUES ( '" + name + "' ) ON DUPLICATE KEY UPDATE " + row + " = '"  + value + "';";
 
 		try {
 			plugin.manageMySql.insertQuery(query);

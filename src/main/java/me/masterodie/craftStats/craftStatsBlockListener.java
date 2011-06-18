@@ -63,6 +63,7 @@ public class craftStatsBlockListener extends BlockListener {
 			sql = new craftStatsSqlHandler(plugin);
 			sql.mySqlInsertQuery(p.getName(), 1, "destroyed_" + p.getItemInHand().getTypeId(), "item");
 		}
+
 	}
 	
 }

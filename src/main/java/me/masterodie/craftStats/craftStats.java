@@ -4,6 +4,9 @@ package me.masterodie.craftStats;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import com.nijiko.permissions.PermissionHandler;
+import com.nijikokun.bukkit.Permissions.Permissions;
+import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.util.logging.Logger;
@@ -32,6 +35,7 @@ public class craftStats extends JavaPlugin {
 	private final craftStatsBlockListener blockListener = new craftStatsBlockListener(this);
 	private final craftStatsPlayerListener playerListener = new craftStatsPlayerListener(this);
 	private final craftStatsEntityListener entityListener = new craftStatsEntityListener(this);
+	public PermissionHandler permissionHandler;
 		
 	public craftStatsCommands commandExec = new craftStatsCommands(this);
 	
@@ -58,6 +62,8 @@ public class craftStats extends JavaPlugin {
 		
 		PluginManager pm = this.getServer().getPluginManager();
 		
+		setupPermissions();
+		
 		pm.registerEvent(Event.Type.BLOCK_PLACE, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.BLOCK_BREAK, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Event.Priority.Normal, this);
@@ -68,10 +74,25 @@ public class craftStats extends JavaPlugin {
 		pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Normal, this);
 		
 		getCommand("dmg").setExecutor(commandExec);
+		
+
+		
 	}
 	
 	public void onDisable() {
 		log.info("craftStats has been Disabled");
 	}
+	
+	private void setupPermissions() {
+	      Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
+
+	      if (this.permissionHandler == null) {
+	          if (permissionsPlugin != null) {
+	              this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
+	          } else {
+	              log.info("Permission system not detected, defaulting to OP");
+	          }
+	      }
+	  }
 }
 
