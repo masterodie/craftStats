@@ -34,8 +34,7 @@ public class craftStatsBlockListener extends BlockListener {
 		sql = new craftStatsSqlHandler(plugin);
 		sql.mySqlInsertQuery(player.getName(), 1, row, "block");
 	} 	
-		
-	//
+
 	
 	public void onBlockBreak(BlockBreakEvent event) {
 		
