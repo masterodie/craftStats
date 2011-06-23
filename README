@@ -1,0 +1,15 @@
+~~~~ craftStats - A logging plugin on MySQL basis for craftbukkit ~~~~
+
+thanks to alta189 for SQL Library
+
+Instructions:
+	
+	- copy craftStats.jar into [craftbukkit dir]/plugins
+	- create {craftbukkt dir}/plugins/craftStats/MySQL.properties with the following contents:
+	
+		
+		host:localhost  		//URL to your MySQL Server
+		username:craftStats		//MySQL username
+		password:craftStats		//MySQL password
+		database:craftStats		//MySQL database
+		table_prefix:cS_		//Table Prefix to identify craftStats tables in huge Databases
