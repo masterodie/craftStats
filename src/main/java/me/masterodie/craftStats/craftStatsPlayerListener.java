@@ -1,6 +1,5 @@
 package me.masterodie.craftStats;
 
-
 import java.util.Date;
 
 import org.bukkit.Location;
@@ -36,6 +35,7 @@ public class craftStatsPlayerListener extends PlayerListener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		
 		playerLoginTime = new Date();
+		final long playerLoginTimeMillis = playerLoginTime.getTime();
 		
 		Player player = event.getPlayer();
 		String playerName = player.getName();
@@ -43,9 +43,9 @@ public class craftStatsPlayerListener extends PlayerListener {
 		
 		sql = new craftStatsSqlHandler(plugin);
 		sql.mySqlInsertQuery(player.getName(), 1, "is_online", "player");
-		sql.mySqlInsertQuery(playerName, this.playerLoginTime.getTime(), "last_login", "player");
+		sql.mySqlInsertQuery(playerName, playerLoginTimeMillis, "last_login", "player");
 					
-		plugin.log.info("Player: " + playerName + " connected from " + player.getAddress().getHostName() + " at " + this.playerLoginTime.getTime() );
+		plugin.log.info("Player: " + playerName + " connected from " + player.getAddress().getHostName() + " at " + playerLoginTimeMillis + "ms");
 	}
 	
 	public void onPlayerQuit(PlayerQuitEvent event) {
@@ -56,7 +56,8 @@ public class craftStatsPlayerListener extends PlayerListener {
 		String group[] = craftStatsPlayerListener.plugin.permissionHandler.getGroups(event.getPlayer().getWorld().getName(), event.getPlayer().getName());
 		String groups = "";
 		
-		for(int i = 0; i <= group.length; i++) {
+		
+		for(int i = 0; i < group.length; i++) {
 			if(i == 0) 
 				groups = group[i];
 			else

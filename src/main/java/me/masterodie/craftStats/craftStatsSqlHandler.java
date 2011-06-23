@@ -228,7 +228,7 @@ public class craftStatsSqlHandler {
 		Date date = new Date();
 
 		
-		if((row == "is_online" || row == "health") && type == "player") {
+		if((row == "is_online" || row == "health" || row == "last_login")  && type == "player") {
 			query = "INSERT INTO " + craftStatsSqlHandler.plugin.mySqlTablePrefix + craftStatsSqlHandler.plugin.mySqlUserTable + " ( `name`, `member_since` ) VALUES ( '" + name + "', '" + date.getTime() + "' ) ON DUPLICATE KEY UPDATE " + row + " = " + value + ";";
 		}
 		else { 
