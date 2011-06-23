@@ -5,8 +5,8 @@ thanks to alta189 for SQL Library
 Instructions:
 	
 	- copy craftStats.jar into {server dir}/plugins
-	- start the server once to let the Plugin create the settings file under {server dir}/plugins/craftStats/MySQL.properties
-	  and edit it to fit your needs
+	- start the server once to let the Plugin create the settings file under 
+	  {server dir}/plugins/craftStats/MySQL.properties and edit it to fit your needs
 	- restart Server
 	- the MySql Tables should be created after the fist Server start
 	
