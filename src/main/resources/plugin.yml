@@ -1,6 +1,6 @@
 name: craftStats
 main: me.masterodie.craftStats.craftStats
-version: _alpha_0.6.6
+version: 0.7_alpha
 
 commands:
    dmg:
