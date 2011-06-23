@@ -49,10 +49,13 @@ public class craftStatsSqlHandler {
 					  "`ID` tinyint(4) NOT NULL AUTO_INCREMENT," +
 					  "`name` varchar(255) NOT NULL," +
 					  "`is_online` tinyint(1) DEFAULT '1'," +
+					  "`health` int(11) NOT NULL DEFAULT '20'," +
 					  "`damage_taken` int(255) DEFAULT  '0'," +
 					  "`damage_dealt` int(255) DEFAULT '0'," +
+					  "`permissions_groups` varchar(255) NOT NULL DEFAULT 'none'," +
 					  "`time_online` bigint DEFAULT '0'," +
 					  "`member_since` bigint DEFAULT  '0'," +
+					  "`last_login` bigint DEFAULT  '0'," +
 					  "`meters_walked` double DEFAULT  '0'," +
 					  "PRIMARY KEY (`ID`)," +
 					  "UNIQUE KEY `name` (`name`)" +
