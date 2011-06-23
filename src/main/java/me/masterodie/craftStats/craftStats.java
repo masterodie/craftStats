@@ -72,8 +72,10 @@ public class craftStats extends JavaPlugin {
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.PLAYER_DROP_ITEM, playerListener, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Monitor, this);
+		pm.registerEvent(Event.Type.ENTITY_DEATH, entityListener, Event.Priority.Monitor, this);
 
 		getCommand("dmg").setExecutor(commandExec);
+	
 	}
 	
 	public void onDisable() {

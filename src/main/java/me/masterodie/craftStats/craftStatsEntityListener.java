@@ -4,6 +4,7 @@ package me.masterodie.craftStats;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityListener;
 import org.bukkit.event.entity.EntityDamageEvent; 
 
@@ -54,6 +55,21 @@ public class craftStatsEntityListener extends EntityListener {
 				sql.mySqlInsertQuery(p.getName(), 1, "destroyed_" + p.getItemInHand().getTypeId(), "item");
 			}
 		}
+	}
+	
+	public void onEntityDeath(EntityDeathEvent event) {
+		Entity damaged = event.getEntity();
+		Entity damager = event.getEntity().getLastDamageCause().getEntity();
+		
+		//f(damager instanceof Player) {
+			//UUID entityId = damaged.getUniqueId();
+			//String playerName = ((Player)damager).getName();
+		
+			plugin.log.info("Damager = " + damager);
+			plugin.log.info("Damaged = " + damaged);
+			
+			//plugin.log.info(playerName + " killed Entity with UUID" + entityId);
+		//}
 	}
 }
 
