@@ -1,10 +1,12 @@
 package me.masterodie.craftStats;
 
 
+//import java.util.UUID;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDeathEvent;
+//import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityListener;
 import org.bukkit.event.entity.EntityDamageEvent; 
 
@@ -57,19 +59,19 @@ public class craftStatsEntityListener extends EntityListener {
 		}
 	}
 	
-	public void onEntityDeath(EntityDeathEvent event) {
-		Entity damaged = event.getEntity();
-		Entity damager = event.getEntity().getLastDamageCause().getEntity();
-		
-		//f(damager instanceof Player) {
-			//UUID entityId = damaged.getUniqueId();
-			//String playerName = ((Player)damager).getName();
-		
-			plugin.log.info("Damager = " + damager);
-			plugin.log.info("Damaged = " + damaged);
-			
-			//plugin.log.info(playerName + " killed Entity with UUID" + entityId);
-		//}
-	}
+//	public void onEntityDeath(EntityDeathEvent event) {
+//		Entity damaged = event.getEntity();
+//		Entity damager = event.getEntity().getLastDamageCause().getEntity();
+//		
+//		if(damager instanceof Player) {
+//			UUID entityId = damaged.getUniqueId();
+//			String playerName = ((Player)damager).getName();
+//		
+//			plugin.log.info("Damager = " + damager);
+//			plugin.log.info("Damaged = " + damaged);
+//			
+//			plugin.log.info(playerName + " killed Entity with UUID" + entityId);
+//		}
+//	}
 }
 
